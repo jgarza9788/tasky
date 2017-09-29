@@ -1,6 +1,6 @@
-Todo
+Tasky
 --------------
-A Todo Electron app 
+A Task Electron app 
 Version: v0.1
 
 **no image yet**
