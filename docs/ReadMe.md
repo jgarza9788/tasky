@@ -12,6 +12,7 @@ Version: v0.1
     - [node.js](#nodejs)
     - [npm](#npm)
     - [electron](#electron)
+- [running the app](#running-the-app)
 - [Using](#using)
 
 <!-- /TOC -->
@@ -38,16 +39,22 @@ npm --version
 npm install -g electron
 ```
 
-
+# running the app
+```
+# Run the app
+npm run electron
+# Run the app
+npm start
+```
 
 # Using
 
 **make sure you have git installed and use this in Terminal/CMD**
 ```
 # Clone this repository
-git clone https://github.com/jgarza9788/ToDo
+git clone https://github.com/jgarza9788/tasky
 # Go into the repository
-cd ToDo
+cd tasky
 # Install dependencies
 npm install
 # Run the app
