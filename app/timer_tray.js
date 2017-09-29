@@ -51,7 +51,7 @@ class TimerTray extends Tray
 
         if(this.mainWindow.isVisible())
         {
-            this.mainWindow.hide();
+            // this.mainWindow.hide();
         }
         else
         {
