@@ -1,41 +1,24 @@
 const electron = require('electron');
-const {app, BrowserWindow,Tray} = electron;
-const TimerTray = require('./app/timer_tray');
-const path = require('path');
+const {Tray} = electron;
 
-let mainWindow;
-let tray;
+class TimerTray extends Tray
+{
+    constructor(iconPath, mainWindow)
+    {
+        super(iconPath);
 
-app.on ('ready',()=>{
-    mainWindow  = new BrowserWindow({
-        width: 300,
-        height: 500,
-        frame: false,
-        resizable: false,
-        show: false,
-    });
-    
+        this.mainWindow = mainWindow;
+        this.on('click', this.onClick.bind(this));
+    }
 
-    mainWindow.loadURL('file://' + __dirname + '/src/index.html');
-
-    const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
-    const iconPath = path.join(__dirname,`./src/assets/${iconName}`);
-    // const iconPath = __dirname + '/src/assets/' + iconName;
-
-    console.log(iconPath);
-
-    tray = new TimerTray(iconPath, mainWindow);
-
-    //--old code--
-    /*
-    tray = new Tray(iconPath);
-    tray.on('click',(event,bounds)=>{
+    onClick(event,bounds)
+    {
 
         console.log(bounds.x);
         console.log(bounds.y);
 
         const {x,y} = bounds;
-        const {width, height} = mainWindow.getBounds();
+        const {width, height} = this.mainWindow.getBounds();
         const screenWidth = electron.screen.getPrimaryDisplay().workAreaSize.width;
         const screenHeight = electron.screen.getPrimaryDisplay().workAreaSize.height;
 
@@ -64,22 +47,25 @@ app.on ('ready',()=>{
         console.log(nX);
         console.log(nY);
 
-        if(mainWindow.isVisible())
+        if(this.mainWindow.isVisible())
         {
-            mainWindow.hide();
+            this.mainWindow.hide();
         }
         else
         {
-            mainWindow.setBounds({
+            this.mainWindow.setBounds({
                 x: parseInt(nX),
                 y: parseInt(nY),
                 //y: process.platform === 'darwin' ? y:y - height,
                 width: width,
                 height: height,
             });
-            mainWindow.show();
+            this.mainWindow.show();
         }
-    });
+    }
+}
 
-    */
-});
+
+
+
+module.exports = TimerTray;
