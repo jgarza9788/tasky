@@ -13,6 +13,7 @@ class MainWindow extends BrowserWindow
             resizable: false,
             show: false,
             skipTaskbar: true, //don't show up on taskbar/dock
+            webPreferences:{backgroundThrottling: false}
         });
 
         this.loadURL(url);
