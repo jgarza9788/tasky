@@ -16,15 +16,15 @@ class TimerTray extends Tray
     onClick(event,bounds)
     {
 
-        console.log(bounds.x);
-        console.log(bounds.y);
+        // console.log(bounds.x);
+        // console.log(bounds.y);
 
         const {x,y} = bounds;
         const {width, height} = this.mainWindow.getBounds();
         const screenWidth = electron.screen.getPrimaryDisplay().workAreaSize.width;
         const screenHeight = electron.screen.getPrimaryDisplay().workAreaSize.height;
 
-        console.log(screenWidth);
+        // console.log(screenWidth);
 
         var nY = y == 0 ? y : y - height;
         if (process.platform === 'win32' && nY === 0)
@@ -46,12 +46,18 @@ class TimerTray extends Tray
             nX = x -(width/2);
         }
 
-        console.log(nX);
-        console.log(nY);
+        // console.log(nX);
+        // console.log(nY);
 
-        if(this.mainWindow.isVisible())
+        console.log(this.mainWindow.blurTime);
+
+        if ( Date.now() - this.mainWindow.blurTime  < 500)
         {
-            // this.mainWindow.hide();
+            //do nothing...because the mainWindow was blured 500 miliseconds ago
+        }
+        else if(this.mainWindow.isVisible())
+        {
+            this.mainWindow.hide();
         }
         else
         {
@@ -79,10 +85,6 @@ class TimerTray extends Tray
         this.popUpContextMenu(menuConfig);
     }
 
-
 }
-
-
-
 
 module.exports = TimerTray;

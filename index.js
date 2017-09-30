@@ -7,7 +7,12 @@ const path = require('path');
 let mainWindow;
 let tray;
 
+let argsCmd = process.argv.slice(2);
+let timerTime = parseInt(argsCmd[0]);
+
 app.on ('ready',()=>{
+
+    console.log(timerTime);
 
     //--old code--
     /*
@@ -38,8 +43,8 @@ app.on ('ready',()=>{
     */  
 
 
-    mainWindow = new MainWindow();
-    mainWindow.loadURL('file://' + __dirname + '/src/index.html');
+    mainWindow = new MainWindow('file://' + __dirname + '/src/index.html');
+    // mainWindow.loadURL('file://' + __dirname + '/src/index.html');
 
     const iconName = process.platform === 'win32' ? 'windows-icon.png' : 'iconTemplate.png';
     const iconPath = path.join(__dirname,`./src/assets/${iconName}`);
